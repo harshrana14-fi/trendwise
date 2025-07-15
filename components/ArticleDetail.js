@@ -1,8 +1,15 @@
-import React from 'react';
+import React from "react";
 import {
-  X, Calendar, Clock, Eye, Share2, MessageCircle,
-  Heart, Bookmark
-} from 'lucide-react';
+  X,
+  Calendar,
+  Clock,
+  Eye,
+  Share2,
+  MessageCircle,
+  Heart,
+  Bookmark,
+} from "lucide-react";
+import Image from "next/image";
 
 const ArticleDetail = ({
   article = {},
@@ -11,31 +18,37 @@ const ArticleDetail = ({
   setNewComment,
   handleCommentSubmit,
   user,
-  onClose
+  onClose,
 }) => {
   const {
-    thumbnail = '/default-thumbnail.jpg',
-    title = 'Untitled',
-    author = 'Unknown Author',
+    thumbnail = "/default-thumbnail.jpg",
+    title = "Untitled",
+    author = "Unknown Author",
     date,
     views = 0,
-    readTime = '1 min',
-    content = '',
-    id
+    readTime = "1 min",
+    content = "",
+    id,
   } = article;
 
-  const formattedDate = date ? new Date(date).toLocaleDateString() : 'Unknown Date';
-  const formattedViews = typeof views === 'number' ? views.toLocaleString() : '0';
+  const formattedDate = date
+    ? new Date(date).toLocaleDateString()
+    : "Unknown Date";
+  const formattedViews =
+    typeof views === "number" ? views.toLocaleString() : "0";
 
   return (
     <div className="max-w-5xl mx-auto bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border border-white/20">
       {/* Header Image & Author Info */}
       <div className="relative h-80 overflow-hidden">
-        <img
+        <Image
           src={thumbnail}
           alt={title}
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
+          sizes="100vw"
         />
+
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
         <button
@@ -50,7 +63,7 @@ const ArticleDetail = ({
             {/* Author Info */}
             <div className="flex items-center space-x-4">
               <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-lg font-bold shadow-lg">
-                {author?.charAt?.(0) || 'A'}
+                {author?.charAt?.(0) || "A"}
               </div>
               <div>
                 <p className="font-semibold text-lg">{author}</p>
@@ -104,10 +117,12 @@ const ArticleDetail = ({
           {user && (
             <div className="mb-8 bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-2xl">
               <div className="flex items-start space-x-4">
-                <img
-                  src={user.avatar || '/default-avatar.png'}
-                  alt={user.name || 'User'}
-                  className="w-12 h-12 rounded-full ring-2 ring-white shadow-lg object-cover"
+                <Image
+                  src={user.avatar || "/default-avatar.png"}
+                  alt={user.name || "User"}
+                  fill
+                  className="rounded-full ring-2 ring-white shadow-lg object-cover"
+                  sizes="48px"
                 />
                 <div className="flex-1">
                   <textarea
@@ -135,20 +150,26 @@ const ArticleDetail = ({
                 key={comment.id}
                 className="flex items-start space-x-4 bg-gray-50 p-6 rounded-2xl"
               >
-                <img
-                  src={comment.avatar || '/default-avatar.png'}
-                  alt={comment.user || 'User'}
-                  className="w-12 h-12 rounded-full ring-2 ring-white shadow-lg object-cover"
+                <Image
+                  src={comment.avatar || "/default-avatar.png"}
+                  alt={comment.user || "User"}
+                  fill
+                  className="rounded-full ring-2 ring-white shadow-lg object-cover"
+                  sizes="48px"
                 />
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-2">
-                    <p className="font-semibold text-gray-800">{comment.user || 'Anonymous'}</p>
+                    <p className="font-semibold text-gray-800">
+                      {comment.user || "Anonymous"}
+                    </p>
                     <p className="text-sm text-gray-500">
-                      {comment.timestamp ? new Date(comment.timestamp).toLocaleDateString() : ''}
+                      {comment.timestamp
+                        ? new Date(comment.timestamp).toLocaleDateString()
+                        : ""}
                     </p>
                   </div>
                   <p className="text-gray-700 leading-relaxed">
-                    {comment.content || ''}
+                    {comment.content || ""}
                   </p>
                 </div>
               </div>
