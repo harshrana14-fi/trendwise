@@ -1,6 +1,6 @@
 // api/trends/route.js
 const express = require('express');
-const TrendAggregator = require('../../lib/trendAggregator');
+const TrendAggregator = require('@/lib/trendAggregator');
 const rateLimit = require('express-rate-limit');
 
 const router = express.Router();
