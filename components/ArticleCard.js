@@ -1,5 +1,6 @@
 import React from 'react';
 import { Calendar, Eye, ArrowRight, TrendingUp, Clock } from 'lucide-react';
+import Image from 'next/image';
 
 const ArticleCard = ({ article, onSelect, index }) => {
   if (!article) return null;
@@ -27,11 +28,14 @@ const ArticleCard = ({ article, onSelect, index }) => {
       }}
     >
       <div className="relative overflow-hidden">
-        <img
-          src={thumbnail}
-          alt={title}
-          className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500"
-        />
+        <Image
+    src={thumbnail}
+    alt={title}
+    fill
+    className="object-cover group-hover:scale-110 transition-transform duration-500"
+    sizes="100vw"
+    priority // optional: for faster loading above the fold
+  />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
         {trending && (
